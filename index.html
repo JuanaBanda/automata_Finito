@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automata Finito en JavaScript con Gráfico</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+</head>
+<body>
+    <script>
+        // Definición del autómata
+        class AutomataFinito {
+            constructor() {
+                this.estadoActual = 'q0';
+                this.estadosAceptacion = ['q1'];
+            }
+
+            procesarCadena(cadena) {
+                for (const caracter of cadena) {
+                    this.transicion(caracter);
+                }
+
+                return this.estadosAceptacion.includes(this.estadoActual);
+            }
+
+            transicion(caracter) {
+                switch (this.estadoActual) {
+                    case 'q0':
+                        if (caracter === 'a') {
+                            this.estadoActual = 'q1';
+                        } else {
+                            this.estadoActual = 'error';
+                        }
+                        break;
+                    case 'q1':
+                        if (caracter === 'b') {
+                            this.estadoActual = 'q0';
+                        } else {
+                            this.estadoActual = 'error';
+                        }
+                        break;
+                    default:
+                        this.estadoActual = 'error';
+                        break;
+                }
+            }
+        }
+
+        // Creación del autómata
+        const automata = new AutomataFinito();
+
+        // Ejemplo de procesamiento de cadena
+        const cadenaEjemplo = 'abababab';
+        const resultado = automata.procesarCadena(cadenaEjemplo);
+
+        // Creación del gráfico con D3.js
+        const svg = d3.select('body').append('svg').attr('width', 300).attr('height', 100);
+
+        svg.append('text')
+            .attr('x', 10)
+            .attr('y', 30)
+            .text(`Cadena "${cadenaEjemplo}" es ${resultado ? 'válida' : 'inválida'}`);
+
+        svg.append('circle').attr('cx', 30).attr('cy', 70).attr('r', 10).style('fill', 'lightblue');
+        svg.append('circle').attr('cx', 100).attr('cy', 70).attr('r', 10).style('fill', 'lightgreen');
+        svg.append('text').attr('x', 30).attr('y', 70).text('q0');
+        svg.append('text').attr('x', 100).attr('y', 70).text('q1');
+        </script>
+</body>
+</html>
