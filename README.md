@@ -50,6 +50,6 @@ Ahora, expliquemos cada parte:
     - Se añade un elemento de texto para mostrar el resultado del procesamiento de la cadena.
     - Se añaden círculos y texto para representar los estados del autómata.
     
-  [image](https://github.com/JuanaBanda/automata_Finito/assets/122316068/43f0168b-ff99-432e-8da0-50ea6625fa04)
 
-    
+![image](https://github.com/JuanaBanda/automata_Finito/assets/122316068/b98e4d0f-e4cf-417a-8ce3-427e94306e7a)
+
